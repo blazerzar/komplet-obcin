@@ -2,6 +2,7 @@
 hk = "latest"
 pkl = "latest"
 python = "3.14"
+rumdl = "latest"
 taplo = "latest"
 uv = "latest"
 yamlfmt = "latest"

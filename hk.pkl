@@ -18,6 +18,10 @@ local linters = new Mapping {
   ["pkl-format"] = (Builtins.pkl_format) {
     depends = "pkl"
   }
+  ["rumdl"] = Builtins.rumdl
+  ["rumdl-format"] = (Builtins.rumdl_format) {
+    depends = "rumdl"
+  }
   ["yamllint"] = Builtins.yamllint
   ["yamlfmt"] = (Builtins.yamlfmt) {
     depends = "yamllint"

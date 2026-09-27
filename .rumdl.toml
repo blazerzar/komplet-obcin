@@ -1,0 +1,9 @@
+[global]
+line-length = 80
+# MD036: bold tagline under the README title is intentional
+# MD041: README starts with a centering <div> instead of the title
+disable = ["MD036", "MD041"]
+
+# Centered README header uses inline HTML
+[MD033]
+allowed-elements = ["div", "img", "sub"]
