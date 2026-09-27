@@ -31,6 +31,7 @@ def main():
     obcine['regija'] = compute_municipality_regions(obcine, regije)
 
     create_municipalities_deck(obcine, os.path.join(BUILD_DIR, 'obcine.apkg'))
+    save_municipalities_csv(obcine, os.path.join(BUILD_DIR, 'obcine.csv'))
 
 
 def layer(layer_id):
@@ -120,6 +121,13 @@ def create_municipalities_deck(obcine, out_file):
     package = genanki.Package(decks)
     package.media_files = media_files
     package.write_to_file(out_file)
+
+
+def save_municipalities_csv(obcine, out_file):
+    obcine = obcine.rename(columns={NAME_COL: 'Ime', 'regija': 'Regija'})
+    obcine = obcine[['Ime', 'Regija']]
+    obcine = obcine.sort_values(['Regija', 'Ime'])
+    obcine.to_csv(out_file, index=False)
 
 
 if __name__ == '__main__':
