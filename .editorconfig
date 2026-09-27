@@ -7,8 +7,5 @@ charset = utf-8
 indent_style = space
 indent_size = 4
 
-[*.pkl]
-indent_size = 2
-
-[*.toml]
+[*.{pkl,toml,yml,yaml}]
 indent_size = 2

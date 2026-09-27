@@ -18,6 +18,10 @@ local linters = new Mapping {
   ["pkl-format"] = (Builtins.pkl_format) {
     depends = "pkl"
   }
+  ["yamllint"] = Builtins.yamllint
+  ["yamlfmt"] = (Builtins.yamlfmt) {
+    depends = "yamllint"
+  }
 }
 
 steps = linters

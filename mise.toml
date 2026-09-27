@@ -4,6 +4,7 @@ pkl = "latest"
 python = "3.14"
 taplo = "latest"
 uv = "latest"
+yamlfmt = "latest"
 
 [env]
 # Automatically activates the uv venv, so `ruff` is on PATH for hk

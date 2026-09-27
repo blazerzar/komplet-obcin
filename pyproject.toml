@@ -14,7 +14,10 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = ["ruff>=0.16.9"]
+dev = [
+  "ruff>=0.16.9",
+  "yamllint>=1.38.0",
+]
 
 [tool.ruff]
 line-length = 80

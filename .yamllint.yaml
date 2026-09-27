@@ -1,0 +1,7 @@
+extends: default
+
+rules:
+  # GitHub Actions uses `on:` as a key, which yamllint treats as a boolean
+  truthy:
+    check-keys: false
+  document-start: disable
