@@ -1,0 +1,19 @@
+[tools]
+hk = "latest"
+pkl = "latest"
+python = "3.14"
+taplo = "latest"
+uv = "latest"
+
+[env]
+# Automatically activates the uv venv, so `ruff` is on PATH for hk
+_.python.venv = { path = ".venv", create = true }
+
+[tasks.setup]
+run = ["uv sync", "hk install"]
+
+[tasks.lint]
+run = "hk check --all"
+
+[tasks.fix]
+run = "hk fix --all"
