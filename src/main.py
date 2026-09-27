@@ -1,3 +1,4 @@
+import logging
 import os
 from zlib import crc32
 
@@ -18,15 +19,26 @@ SLOVENE_COORDINATE_SYSTEM = 3794
 
 BUILD_DIR = 'build'
 
+logger = logging.getLogger(__name__)
+
 
 def main():
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s %(levelname)s %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S',
+    )
+
     if not os.path.exists(BUILD_DIR):
         os.mkdir(BUILD_DIR)
 
+    logger.info('Downloading regions')
     regije = layer(REGIJE)
+    logger.info('Loaded %d regions', len(regije))
+
+    logger.info('Downloading municipalities')
     obcine = layer(OBCINE)
-    print(f'Loaded {len(regije)} regions')
-    print(f'Loaded {len(obcine)} municipalities')
+    logger.info('Loaded %d municipalities', len(obcine))
 
     obcine['regija'] = compute_municipality_regions(obcine, regije)
 
@@ -79,13 +91,14 @@ def municipalities_plot(obcine, file_name, marked=None):
     slovenija.plot(ax=ax, color='none', edgecolor=C['border'], linewidth=1.0)
 
     file_path = os.path.join(BUILD_DIR, file_name)
-    fig.savefig(file_path, dpi=250, bbox_inches='tight')
+    fig.savefig(file_path, dpi=150, bbox_inches='tight')
     plt.close(fig)
     return file_path
 
 
 def create_municipalities_deck(obcine, out_file):
     """Create the final municipalities deck with subdecks for each region."""
+    logger.info('Creating deck')
     decks = [
         genanki.Deck(
             crc32('Občine'.encode()),
@@ -116,7 +129,7 @@ def create_municipalities_deck(obcine, out_file):
                 )
             )
 
-        print(f'Completed {regija}')
+        logger.info('Completed %s', regija)
 
     package = genanki.Package(decks)
     package.media_files = media_files
